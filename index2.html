@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>권정진의 간호 포트폴리오</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg: #d4fff9;
+    --surface: #fff;
+    --text: #35536d;
+    --muted: #a7c7e2;
+    --accent: #304e63;
+    --pale: #d9efff;
+    --shadow: 0 12px 30px #9bcbe733;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: background .6s, color .5s;
+    overflow-x: hidden;
+}
+
+/* 취미별 화면 테마 */
+body.music {
+    --bg: #e5edff;
+    --accent: #657edb;
+    --pale: #d5ddff;
+}
+
+body.travel {
+    --bg: #e4f7ff;
+    --accent: #4ba7d8;
+    --pale: #c9efff;
+}
+
+body.exercise {
+    --bg: #e5f9f0;
+    --accent: #48a88c;
+    --pale: #c9f0dc;
+}
+
+body.cooking {
+    --bg: #fff1e7;
+    --accent: #e29b67;
+    --pale: #ffe0c7;
+}
+
+.container {
+    max-width: 1060px;
+    margin: auto;
+    padding: 24px 22px 54px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+}
+
+.brand {
+    font-family: Jua, sans-serif;
+    color: var(--accent);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.back {
+    border: 0;
+    border-radius: 24px;
+    background: #ffffffb8;
+    padding: 10px 16px;
+    color: var(--text);
+    font-weight: 700;
+    cursor: pointer;
+    display: none;
+}
+
+.back.show {
+    display: block;
+}
+
+/* 첫 화면 */
+.hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        130deg,
+        #c9eaff,
+        #e8f7ff 60%,
+        #dce9ff
+    );
+    border: 2px solid white;
+    border-radius: 30px;
+    padding: clamp(25px, 5vw, 48px);
+    box-shadow: var(--shadow);
+    min-height: 230px;
+}
+
+.hero .eyebrow {
+    display: inline-block;
+    background: #fff;
+    border-radius: 22px;
+    padding: 7px 13px;
+    color: #5499ca;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.hero h1 {
+    font-family: Jua, sans-serif;
+    font-size: clamp(35px, 6vw, 54px);
+    line-height: 1.2;
+    margin: 18px 0 10px;
+    color: #346a94;
+}
+
+.hero h1 span {
+    color: #59a9df;
+}
+
+.hero p {
+    font-size: clamp(15px, 2vw, 18px);
+    line-height: 1.8;
+    color: #567892;
+    margin: 0;
+    max-width: 620px;
+}
+
+.cloud {
+    position: absolute;
+    right: 4%;
+    top: 20px;
+    font-size: clamp(65px, 11vw, 115px);
+    opacity: .45;
+    animation: cloudFloat 5s ease-in-out infinite;
+}
+
+.hero-sticker {
+    position: absolute;
+    right: 8%;
+    bottom: 22px;
+    font-size: clamp(40px, 7vw, 70px);
+    transform: rotate(8deg);
+}
+
+@keyframes cloudFloat {
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+/* 홈의 네모 아이콘 메뉴 */
+.menu-title {
+    text-align: center;
+    margin: 30px 0 14px;
+    font-family: Jua, sans-serif;
+    font-size: 24px;
+    color: var(--accent);
+}
+
+.menu-sub {
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 20px;
+}
+
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.tile {
+    border: 2px solid #fff;
+    background: #ffffffc9;
+    border-radius: 24px;
+    min-height: 150px;
+    padding: 20px 15px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform .2s, background .3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+}
+
+.tile:hover {
+    transform: translateY(-6px) scale(1.02);
+    background: #fff;
+}
+
+.tile .emoji {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.tile strong {
+    font-family: Jua, sans-serif;
+    font-size: 20px;
+    color: var(--accent);
+}
+
+.tile small {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* 페이지 전환 */
+.pageview {
+    display: none;
+    animation: fadeIn .35s ease;
+}
+
+.pageview.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 각 페이지 상단 */
+.detail-hero {
+    border-radius: 28px;
+    background: linear-gradient(
+        135deg,
+        var(--pale),
+        #ffffffc9
+    );
+    border: 2px solid white;
+    padding: clamp(23px, 4vw, 38px);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+}
+
+.detail-hero .bigemoji {
+    font-size: 50px;
+}
+
+.detail-hero h1 {
+    font-family: Jua, sans-serif;
+    color: var(--accent);
+    font-size: clamp(30px, 5vw, 42px);
+    margin: 10px 0;
+}
+
+.detail-hero p {
+    line-height: 1.9;
+    font-size: 16px;
+    margin: 0;
+    color: var(--muted);
+}
+
+.detail-card {
+    background: white;
+    border: 1px solid #f4fbff;
+    border-radius: 25px;
+    padding: clamp(20px, 4vw, 30px);
+    box-shadow: var(--shadow);
+    line-height: 1.9;
+}
+
+.detail-card h2 {
+    font-family: Jua, sans-serif;
+    color: var(--accent);
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.detail-card p {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 2;
+}
+
+/* 프로필 말풍선 애니메이션 */
+.bubbles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    margin-top: 18px;
+}
+
+.bubble {
+    border-radius: 22px;
+    background: #e8f6ff;
+    padding: 19px 12px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #4c90c3;
+    border: 2px solid white;
+    animation: bubblePop 2.7s ease-in-out infinite;
+    transform: scale(.86);
+    opacity: .8;
+}
+
+.bubble:nth-child(2) {
+    animation-delay: .45s;
+}
+
+.bubble:nth-child(3) {
+    animation-delay: .9s;
+}
+
+@keyframes bubblePop {
+    0%, 100% {
+        transform: scale(.82);
+        opacity: .72;
+    }
+
+    45% {
+        transform: scale(1.08);
+        opacity: 1;
+    }
+
+    65% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 관심 분야 */
+.interest-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.interest-card {
+    background: #f1f9ff;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.interest-card .e {
+    font-size: 30px;
+}
+
+.interest-card h3 {
+    font-family: Jua, sans-serif;
+    color: var(--accent);
+    margin: 7px 0;
+}
+
+.interest-card p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--muted);
+    margin: 0;
+}
+
+/* 취미 선택 버튼 */
+.hobby-picker {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.hobby-btn {
+    border: 2px solid white;
+    background: #ffffffc9;
+    border-radius: 20px;
+    padding: 16px 10px;
+    cursor: pointer;
+    color: var(--text);
+    font-family: inherit;
+    transition: .25s;
+}
+
+.hobby-btn:hover,
+.hobby-btn.selected {
+    transform: translateY(-3px);
+    background: white;
+    box-shadow: var(--shadow);
+    border-color: var(--accent);
+}
+
+.hobby-btn .e {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.hobby-btn strong {
+    font-family: Jua, sans-serif;
+    font-size: 17px;
+    color: var(--accent);
+}
+
+/* 취미별 테마 패널 */
+.hobby-panel {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        135deg,
+        var(--pale),
+        #fff
+    );
+    border: 2px solid white;
+    border-radius: 26px;
+    padding: 28px;
+    min-height: 210px;
+    box-shadow: var(--shadow);
+}
+
+.hobby-panel h2 {
+    font-family: Jua, sans-serif;
+    color: var(--accent);
+    font-size: 28px;
+    margin: 0 0 10px;
+}
+
+.hobby-panel p {
+    font-size: 16px;
+    line-height: 2;
+    color: var(--muted);
+    max-width: 700px;
+    margin: 0;
+}
+
+.scene {
+    position: absolute;
+    right: 25px;
+    bottom: 16px;
+    font-size: 42px;
+    opacity: .7;
+    animation: sceneMove 4s ease-in-out infinite;
+}
+
+@keyframes sceneMove {
+    50% {
+        transform: translateY(-9px) rotate(4deg);
+    }
+}
+
+/* 음악 음표 */
+.music-notes {
+    position: absolute;
+    right: 22%;
+    top: 12px;
+    font-size: 25px;
+    animation: notes 3s ease-in-out infinite;
+}
+
+@keyframes notes {
+    0%, 100% {
+        transform: translateY(0) rotate(-10deg);
+        opacity: .4;
+    }
+
+    50% {
+        transform: translateY(-14px) rotate(10deg);
+        opacity: 1;
+    }
+}
+
+/* 여행 비행기 */
+.plane {
+    position: absolute;
+    top: 20px;
+    right: -60px;
+    font-size: 36px;
+    animation: fly 8s linear infinite;
+}
+
+@keyframes fly {
+    0% {
+        right: -60px;
+        top: 20px;
+    }
+
+    100% {
+        right: 110%;
+        top: 0;
+    }
+}
+
+/* 운동 반짝임과 움직임 */
+.stars {
+    position: absolute;
+    right: 22px;
+    top: 15px;
+    font-size: 26px;
+    animation: twinkle 1.7s infinite alternate;
+}
+
+@keyframes twinkle {
+    to {
+        opacity: .3;
+        transform: scale(.8);
+    }
+}
+
+.runner {
+    position: absolute;
+    right: 30px;
+    bottom: 15px;
+    font-size: 40px;
+    animation: run 1s ease-in-out infinite alternate;
+}
+
+@keyframes run {
+    to {
+        transform: translateX(-20px) rotate(-7deg);
+    }
+}
+
+/* 요리 김 */
+.cooksteam {
+    position: absolute;
+    right: 60px;
+    bottom: 42px;
+    font-size: 35px;
+    animation: steam 2s ease-in-out infinite;
+}
+
+@keyframes steam {
+    50% {
+        transform: translateY(-15px);
+        opacity: .5;
+    }
+}
+
+/* 하단 */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #90aec6;
+    font-size: 13px;
+}
+
+footer b {
+    color: var(--accent);
+}
+
+/* 모바일 화면 */
+@media (max-width: 650px) {
+    .container {
+        padding: 17px 13px 35px;
+    }
+
+    .tiles {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 11px;
+    }
+
+    .tile {
+        min-height: 130px;
+        padding: 14px 8px;
+    }
+
+    .tile .emoji {
+        font-size: 32px;
+    }
+
+    .tile strong {
+        font-size: 18px;
+    }
+
+    .bubbles {
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+    .bubble {
+        padding: 15px;
+    }
+
+    .interest-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hobby-picker {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-sticker {
+        right: 5%;
+        bottom: 10px;
+    }
+
+    .detail-hero p,
+    .detail-card p,
+    .hobby-panel p {
+        font-size: 15px;
+    }
+
+    .scene {
+        font-size: 34px;
+        right: 15px;
+    }
+
+    .hobby-panel {
+        padding: 22px;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+    <div class="brand" onclick="showPage('home')">
+        ☁️ 권정진의 간호 포트폴리오
+    </div>
+
+    <button class="back" id="backBtn" onclick="showPage('home')">
+        ← 홈으로 돌아가기
+    </button>
+</header>
+
+<main>
+
+<!-- 홈 화면 -->
+<section class="pageview active" id="home">
+
+    <div class="hero">
+        <div class="eyebrow">
+            단국대학교 간호학과 · 2학년
+        </div>
+
+        <h1>안녕하세요, <span>권정진입니다!</span> 🌷</h1>
+
+        <p>
+            따뜻한 마음과 꾸준한 배움으로 성장하는 <strong>간호학생</strong>입니다.<br>
+            아래 아이콘을 눌러 저에 대해 더 알아보세요!
+        </p>
+
+        <div class="cloud">☁️</div>
+        <div class="hero-sticker">🩺</div>
+    </div>
+
+    <h2 class="menu-title">저를 소개합니다 ✨</h2>
+
+    <p class="menu-sub">
+        궁금한 아이콘을 눌러 각 페이지를 살펴보세요!
+    </p>
+
+    <div class="tiles">
+
+        <button class="tile" onclick="showPage('profile')">
+            <span class="emoji">👤</span>
+            <strong>프로필</strong>
+            <small>Profile</small>
+        </button>
+
+        <button class="tile" onclick="showPage('about')">
+            <span class="emoji">💌</span>
+            <strong>나에 대하여</strong>
+            <small>About Me</small>
+        </button>
+
+        <button class="tile" onclick="showPage('interests')">
+            <span class="emoji">✨</span>
+            <strong>관심 분야</strong>
+            <small>Interests</small>
+        </button>
+
+        <button class="tile" onclick="showPage('strengths')">
+            <span class="emoji">💎</span>
+            <strong>강점</strong>
+            <small>Strengths</small>
+        </button>
+
+        <button class="tile" onclick="showPage('hobbies')">
+            <span class="emoji">🎧</span>
+            <strong>취미</strong>
+            <small>Hobbies</small>
+        </button>
+
+        <button class="tile" onclick="showPage('goal')">
+            <span class="emoji">🌈</span>
+            <strong>나의 목표</strong>
+            <small>My Goal</small>
+        </button>
+
+    </div>
+</section>
+
+<!-- 프로필 -->
+<section class="pageview" id="profile">
+
+    <div class="detail-hero">
+        <div class="bigemoji">👩🏻‍⚕️</div>
+        <h1>프로필</h1>
+        <p>단국대학교 간호학과 2학년</p>
+    </div>
+
+    <div class="detail-card">
+        <h2>안녕하세요, 권정진입니다!</h2>
+
+        <p>
+            따뜻한 마음을 가진 사람이 되고, 맡은 일을 성실하게 해내며,
+            환자뿐 아니라 자신도 소중히 돌볼 수 있는 사람이 되기 위해
+            노력하고 있습니다. 하루하루 배우고 성장하면서 주변에
+            긍정적인 마음과 도움을 전하고 싶습니다.
+        </p>
+
+        <div class="bubbles">
+            <div class="bubble">💗 따뜻한 마음</div>
+            <div class="bubble">🌱 성실함</div>
+            <div class="bubble">🫶 환자와 자신을 돌보기</div>
+        </div>
+    </div>
+</section>
+
+<!-- About Me -->
+<section class="pageview" id="about">
+
+    <div class="detail-hero">
+        <div class="bigemoji">💌</div>
+        <h1>나에 대하여</h1>
+        <p>작은 배움을 소중히 여기며, 경험을 통해 성장하는 사람</p>
+    </div>
+
+    <div class="detail-card">
+        <h2>Curious mind, caring heart</h2>
+
+        <p>
+            새로운 것을 배우는 과정에서 즐거움을 느끼고,
+            배운 것을 실제 삶과 간호에 연결해 보려고 합니다.
+            아직 배우고 성장하는 학생이지만, 매 순간 성실하게 임하며
+            다른 사람의 마음을 이해하고 존중하는 태도를 갖추고 싶습니다.
+            나 자신을 돌보는 것도 건강한 간호사가 되기 위한
+            중요한 과정이라고 생각합니다.
+        </p>
+    </div>
+</section>
+
+<!-- Interests -->
+<section class="pageview" id="interests">
+
+    <div class="detail-hero">
+        <div class="bigemoji">✨</div>
+        <h1>관심 분야</h1>
+        <p>흥미를 가지고 배우고 탐색하는 주제들</p>
+    </div>
+
+    <div class="interest-grid">
+
+        <div class="interest-card">
+            <div class="e">🍰</div>
+            <h3>요리·베이킹 영상</h3>
+            <p>
+                베이킹 영상을 보면서 마음의 휴식을 찾고
+                자기 자신을 돌보는 시간을 가집니다.
+            </p>
+        </div>
+
+        <div class="interest-card">
+            <div class="e">📚</div>
+            <h3>새로운 배움</h3>
+            <p>
+                간호학 전공 수업에 항상 흥미를 가지고 참여하며,
+                새로운 지식과 간호 개념을 배우는 과정에서 보람을 느낍니다.
+            </p>
+        </div>
+
+        <div class="interest-card">
+            <div class="e">💻</div>
+            <h3>디지털 기술</h3>
+            <p>
+                디지털 수업에서 배운 내용을 활용해 간호학에 기여할 방법을 탐색하고,
+                의료와 간호에 적용될 최신 기술을 알아가는 데 관심이 있습니다.
+            </p>
+        </div>
+
+        <div class="interest-card">
+            <div class="e">🩺</div>
+            <h3>간호와 건강</h3>
+            <p>
+                환자의 건강과 안전을 돕는 간호에 관심이 있으며,
+                몸과 마음의 건강을 함께 돌보는 방법을 배우고 싶습니다.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Strengths -->
+<section class="pageview" id="strengths">
+
+    <div class="detail-hero">
+        <div class="bigemoji">💎</div>
+        <h1>나의 강점</h1>
+        <p>책임감과 성실함으로 믿음을 쌓아갑니다.</p>
+    </div>
+
+    <div class="detail-card">
+
+        <h2>🤝 책임감</h2>
+
+        <p>
+            맡은 일과 역할을 중요하게 생각하고,
+            해야 할 일을 끝까지 해내기 위해 노력합니다.
+        </p>
+
+        <h2>🌷 성실함</h2>
+
+        <p>
+            작은 일도 꾸준하고 진지하게 임하며,
+            매일 조금씩 발전하는 것을 중요하게 생각합니다.
+        </p>
+
+    </div>
+</section>
+
+<!-- Hobbies -->
+<section class="pageview" id="hobbies">
+
+    <div class="detail-hero">
+        <div class="bigemoji">🎨</div>
+        <h1>나의 취미</h1>
+        <p>
+            아이콘을 선택하면 취미에 맞게 화면 분위기가 바뀝니다. ☁️
+        </p>
+    </div>
+
+    <div class="hobby-picker">
+
+        <button class="hobby-btn selected"
+                onclick="setHobby('music',this)">
+            <span class="e">🎵</span>
+            <strong>음악 감상</strong>
+        </button>
+
+        <button class="hobby-btn"
+                onclick="setHobby('travel',this)">
+            <span class="e">✈️</span>
+            <strong>여행</strong>
+        </button>
+
+        <button class="hobby-btn"
+                onclick="setHobby('exercise',this)">
+            <span class="e">🏃</span>
+            <strong>운동</strong>
+        </button>
+
+        <button class="hobby-btn"
+                onclick="setHobby('cooking',this)">
+            <span class="e">🧁</span>
+            <strong>요리 영상</strong>
+        </button>
+
+    </div>
+
+    <div class="hobby-panel" id="hobbyPanel">
+        <div class="music-notes">♪ ♫ ♬</div>
+
+        <h2>🎵 음악 감상</h2>
+
+        <p>
+            주로 팝송이나 신나는 음악을 들으며 기분을 전환하고
+            에너지를 얻습니다. 음악과 함께하는 시간이
+            일상의 작은 즐거움이 됩니다.
+        </p>
+
+        <div class="scene">🎧🎶</div>
+    </div>
+</section>
+
+<!-- My Goal -->
+<section class="pageview" id="goal">
+
+    <div class="detail-hero">
+        <div class="bigemoji">🌈</div>
+        <h1>나의 목표</h1>
+        <p>기술을 활용하되, 사람의 마음을 잊지 않는 간호사</p>
+    </div>
+
+    <div class="detail-card">
+
+        <h2>
+            Technology in my hands,
+            Empathy in my heart. 💙
+        </h2>
+
+        <p>
+            디지털 기술을 잘 활용하여 더 안전하고 효과적인 간호를 제공하고 싶습니다.
+            동시에 기술만으로는 채울 수 없는 간호의 따뜻함을 소중히 여기며,
+            환자의 마음을 이해하고 진심으로 소통하는 간호사가 되고 싶습니다.
+            환자에게 신뢰받고, 환자와 나 자신을 모두 돌볼 줄 알며,
+            계속 배우고 성장하는 간호사가 되는 것이 목표입니다.
+        </p>
+
+    </div>
+</section>
+
+</main>
+
+<footer>
+    배움에는 호기심을, 간호에는 따뜻함을 <b>♥</b>
+    · 정진의 포트폴리오
+</footer>
+
+</div>
+
+<script>
+
+/* 페이지 이동 */
+function showPage(id) {
+
+    document.querySelectorAll('.pageview')
+        .forEach(p => p.classList.remove('active'));
+
+    document.getElementById(id).classList.add('active');
+
+    document.getElementById('backBtn')
+        .classList.toggle('show', id !== 'home');
+
+    if (id !== 'hobbies') {
+        document.body.className = '';
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+/* 취미별 화면 테마 변경 */
+function setHobby(kind, btn) {
+
+    document.body.className = kind;
+
+    document.querySelectorAll('.hobby-btn')
+        .forEach(b => b.classList.remove('selected'));
+
+    btn.classList.add('selected');
+
+    const panel = document.getElementById('hobbyPanel');
+
+    let content = {
+
+        music: {
+            title: '🎵 음악 감상',
+            text: '주로 팝송이나 신나는 음악을 들으며 기분을 전환하고 에너지를 얻습니다. 음악과 함께하는 시간이 일상의 작은 즐거움이 됩니다.',
+            decor: '🎧🎶',
+            extra: '<div class="music-notes">♪ ♫ ♬</div>'
+        },
+
+        travel: {
+            title: '✈️ 여행',
+            text: '여행을 떠나 새로운 장소와 풍경을 만나는 것을 좋아합니다. 낯선 곳을 걸으며 새로운 경험을 하고, 자연의 아름다움을 느끼며 일상의 활력을 얻습니다.',
+            decor: '🌳🏞️',
+            extra: '<div class="plane">✈️</div>'
+        },
+
+        exercise: {
+            title: '🏃 운동',
+            text: '운동을 통해 몸을 움직이고 건강한 에너지를 채웁니다. 꾸준히 운동하며 체력과 기분을 관리하고, 나 자신을 돌보는 시간을 만들어 갑니다.',
+            decor: '💪🏃‍♀️',
+            extra: '<div class="stars">✨🌟</div>'
+        },
+
+        cooking: {
+            title: '🧁 요리 영상',
+            text: '요리와 베이킹 영상을 보며 마음의 휴식을 찾습니다. 맛있는 음식을 만드는 과정을 보는 즐거움으로 잠시 여유를 가지며, 나를 돌보는 시간을 보냅니다.',
+            decor: '🍰🍪',
+            extra: '<div class="cooksteam">♨️</div>'
+        }
+    };
+
+    let c = content[kind];
+
+    panel.innerHTML =
+        c.extra +
+        '<h2>' + c.title + '</h2>' +
+        '<p>' + c.text + '</p>' +
+        '<div class="scene">' + c.decor + '</div>';
+}
+
+</script>
+
+</body>
+</html>
